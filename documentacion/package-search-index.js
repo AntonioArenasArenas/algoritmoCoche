@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.astar.car.aStarImplementation"},{"l":"com.astar.car.aStarImplementation.algorithms"},{"l":"com.astar.car.aStarImplementation.controller"},{"l":"com.astar.car.aStarImplementation.model"}];updateSearchResults();
