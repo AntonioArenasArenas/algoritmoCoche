@@ -271,7 +271,7 @@ public class CocheGraph {
 			// Comprobamos que esta casilla tiene obstáculos, si los tiene,
 			// restamos 1 vida y actualizamos el peso de todas las aristas de
 			// este vértice proporcionalmente a la vida restante.
-			if (grafoReal[paso.getX()][paso.getY()].equals("o")) {
+			if (grafoReal[paso.getX()][paso.getY()].contains("o")) {
 				this.vidas--;
 				if (vidas == 0) {
 					return 0;

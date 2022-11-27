@@ -2,6 +2,7 @@ package com.astar.car.aStarImplementation.controller;
 
 import java.util.List;
 
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,16 @@ public class GrafoController {
 			siguiente = coche.caminoMasCorto().getVertexList().get(1);
 		}
 		grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "c";
+		if (grafo[siguiente.getX()][siguiente.getY()].contains("o")) {
+			int vidas = coche.getVidas() - 1;
+			coche.setVidas(vidas);
+			if (vidas == 0) {
+				grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "e";
+			}
+			for (DefaultWeightedEdge d : coche.getGrafo().edgesOf(siguiente)) {
+				coche.getGrafo().setEdgeWeight(d, 10 - vidas + 1);
+			}
+		}
 		return grafo;
 	}
 
