@@ -242,8 +242,8 @@ public class CocheGraph {
 	 * Método que calcula con las condiciones actuales el camino más corto entre la
 	 * posición inicial y la posición final de los atributos de esta clase}
 	 * 
-	 * @return El camino más corto entre los dos puntos, se puede obtener mucha
-	 *         información de esta clase
+	 * @return El camino más corto entre los dos puntos o null si no existe, se
+	 *         puede obtener mucha información de esta clase
 	 */
 	public GraphPath<Casilla, DefaultWeightedEdge> caminoMasCorto() {
 		this.pos_inicial = getCasillaInGrafo(pos_inicial);
@@ -265,7 +265,13 @@ public class CocheGraph {
 			// Comprobamos los barrancos de los vértices vecinos
 			checkBarrancos(grafoReal);
 			// Obtenemos el primer paso del algoritmo
-			Casilla paso = caminoMasCorto().getVertexList().get(1);
+			Casilla paso = null;
+			if (caminoMasCorto() != null) {
+				paso = caminoMasCorto().getVertexList().get(1);
+			} else {
+				this.vidas=0;
+				return 0;
+			}
 			// Lo actualizamos como posiciñon inicial para la próxima iteración
 			this.pos_inicial = paso;
 			// Añadimos como primer paso del camino más corto

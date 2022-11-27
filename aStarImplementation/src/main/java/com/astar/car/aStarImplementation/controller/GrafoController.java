@@ -1,5 +1,6 @@
 package com.astar.car.aStarImplementation.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
@@ -43,7 +44,17 @@ public class GrafoController {
 		obtenerCasillaInicial(grafo, coche);
 		coche.setPos_destino(coche.getCasillaInGrafo(new Casilla(2, 2)));
 		coche.checkBarrancos(grafo);
-		List<Casilla> listaVertices = coche.caminoMasCorto().getVertexList();
+		List<Casilla> listaVertices = new LinkedList<>();
+		// Si no hay camino posible porque todos son barrancos, se debe devolver error
+		if (coche.caminoMasCorto() != null) {
+			listaVertices = coche.caminoMasCorto().getVertexList();
+		} else {
+			grafo[coche.getPos_inicial().getX()][coche.getPos_inicial()
+					.getY()] = grafo[coche.getPos_inicial().getX()][coche.getPos_inicial().getY()] + "c";
+			grafo[coche.getPos_inicial().getX()][coche.getPos_inicial()
+					.getY()] = grafo[coche.getPos_inicial().getX()][coche.getPos_inicial().getY()] + "e";
+			return grafo;
+		}
 		Casilla siguiente;
 		// Si ha llegado al destino sólo tiene un elemento el array
 		if (listaVertices.size() == 1) {

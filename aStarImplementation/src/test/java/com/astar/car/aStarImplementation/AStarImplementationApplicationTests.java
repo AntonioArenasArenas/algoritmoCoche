@@ -131,8 +131,13 @@ class AStarImplementationApplicationTests {
 		int columnas = grafo[0].length;
 		coche.createGraph(filas, columnas);
 		coche.checkBarrancos(grafo);
-		System.out.println(coche.caminoMasCorto().getVertexList() + "\n");
-		assertEquals(coche.caminoMasCorto().getEndVertex(), coche.getPos_destino());
+		if (coche.caminoMasCorto() != null) {
+			System.out.println(coche.caminoMasCorto().getVertexList() + "\n");
+			assertEquals(coche.caminoMasCorto().getEndVertex(), coche.getPos_destino());
+		} else {
+			assertEquals(coche.getGrafo().degreeOf(coche.getPos_inicial()), 0);
+		}
+
 	}
 
 	/**
