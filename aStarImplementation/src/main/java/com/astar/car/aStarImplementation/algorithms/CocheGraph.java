@@ -214,6 +214,8 @@ public class CocheGraph {
 		List<Casilla> vecinos = calculaVecinos(this.pos_inicial, grafoReal.length, grafoReal[0].length);
 		for (int i = 0; i < vecinos.size(); i++) {
 			if (grafoReal[vecinos.get(i).getX()][vecinos.get(i).getY()].equals("b")) {
+				grafoReal[vecinos.get(i).getX()][vecinos.get(i)
+						.getY()] = grafoReal[vecinos.get(i).getX()][vecinos.get(i).getY()] + "B";
 				this.grafo.removeVertex(vecinos.get(i));
 			}
 		}
@@ -279,6 +281,7 @@ public class CocheGraph {
 				for (DefaultWeightedEdge d : grafo.edgesOf(paso)) {
 					grafo.setEdgeWeight(d, 10 - vidas + 1);
 				}
+				grafoReal[paso.getX()][paso.getY()] = grafoReal[paso.getX()][paso.getY()] + "O";
 			}
 		}
 
