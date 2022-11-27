@@ -48,15 +48,21 @@ public class GrafoController {
 		} else {
 			siguiente = coche.caminoMasCorto().getVertexList().get(1);
 		}
-		grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "c";
-		if (grafo[siguiente.getX()][siguiente.getY()].contains("o")) {
-			int vidas = coche.getVidas() - 1;
-			coche.setVidas(vidas);
-			if (vidas == 0) {
-				grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "e";
-			}
-			for (DefaultWeightedEdge d : coche.getGrafo().edgesOf(siguiente)) {
-				coche.getGrafo().setEdgeWeight(d, 10 - vidas + 1);
+		if ((grafo[coche.getPos_inicial().getX()][coche.getPos_inicial().getY()].contains("e"))) {
+			grafo[coche.getPos_inicial().getX()][coche.getPos_inicial()
+					.getY()] = grafo[coche.getPos_inicial().getX()][coche.getPos_inicial().getY()] + "c";
+			return grafo;
+		} else {
+			grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "c";
+			if (grafo[siguiente.getX()][siguiente.getY()].contains("o")) {
+				int vidas = coche.getVidas() - 1;
+				coche.setVidas(vidas);
+				if (vidas == 0) {
+					grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "e";
+				}
+				for (DefaultWeightedEdge d : coche.getGrafo().edgesOf(siguiente)) {
+					coche.getGrafo().setEdgeWeight(d, 10 - vidas + 1);
+				}
 			}
 		}
 		return grafo;
