@@ -1,5 +1,7 @@
 package com.astar.car.aStarImplementation.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,7 @@ public class GrafoController {
 	@CrossOrigin
 	@GetMapping("/array")
 	public String[][] generateArray() {
-		String[][] grafoBarrancos = { { "c", "b", "o" }, { "", "o", "" }, { "b", "o", "" }, { "", "o", "" },
+		String[][] grafoBarrancos = { { "c", "b", "o" }, { "", "o", "" }, { "b", "o", "f" }, { "", "o", "" },
 				{ "b", "b", "o" } };
 		return grafoBarrancos;
 	}
@@ -37,7 +39,13 @@ public class GrafoController {
 		coche.createGraph(filas, columnas);
 		obtenerCasillaInicial(grafo, coche);
 		coche.setPos_destino(coche.getCasillaInGrafo(new Casilla(2, 2)));
-		Casilla siguiente = coche.caminoMasCorto().getVertexList().get(1);
+		List<Casilla> listaVertices = coche.caminoMasCorto().getVertexList();
+		Casilla siguiente;
+		if (listaVertices.size() == 1) {
+			siguiente = coche.caminoMasCorto().getVertexList().get(0);
+		} else {
+			siguiente = coche.caminoMasCorto().getVertexList().get(1);
+		}
 		grafo[siguiente.getX()][siguiente.getY()] = "c";
 		return grafo;
 	}

@@ -40,9 +40,9 @@ class AStarImplementationApplicationTests {
 	 * poniendo b en los barrancos y o en los obstáculos
 	 */
 	public static Stream<String[][]> barrancosSet() {
-		String[][] grafoConBarrancos1 = { { "", "o", "" }, { "", "", "o" }, { "o", "", "" } };
-		String[][] grafoConBarrancos2 = { { "", "b", "o", "" }, { "o", "", "", "" }, { "o", "", "", "o" } };
-		String[][] grafoConBarrancos3 = { { "", "b", "o" }, { "", "o", "" }, { "b", "o", "" }, { "", "o", "" },
+		String[][] grafoConBarrancos1 = { { "", "o", "" }, { "", "", "o" }, { "o", "", "f" } };
+		String[][] grafoConBarrancos2 = { { "", "b", "o", "" }, { "o", "", "", "" }, { "o", "", "f", "o" } };
+		String[][] grafoConBarrancos3 = { { "", "b", "o" }, { "", "o", "" }, { "b", "o", "f" }, { "", "o", "" },
 				{ "b", "b", "o" } };
 		return Stream.of(grafoConBarrancos1, grafoConBarrancos2, grafoConBarrancos3);
 	}
