@@ -39,6 +39,7 @@ public class GrafoController {
 		coche.createGraph(filas, columnas);
 		obtenerCasillaInicial(grafo, coche);
 		coche.setPos_destino(coche.getCasillaInGrafo(new Casilla(2, 2)));
+		coche.checkBarrancos(grafo);
 		List<Casilla> listaVertices = coche.caminoMasCorto().getVertexList();
 		Casilla siguiente;
 		if (listaVertices.size() == 1) {
@@ -46,7 +47,7 @@ public class GrafoController {
 		} else {
 			siguiente = coche.caminoMasCorto().getVertexList().get(1);
 		}
-		grafo[siguiente.getX()][siguiente.getY()] = "c";
+		grafo[siguiente.getX()][siguiente.getY()] = grafo[siguiente.getX()][siguiente.getY()] + "c";
 		return grafo;
 	}
 
@@ -59,8 +60,8 @@ public class GrafoController {
 
 		for (int i = 0; i < grafo.length; i++) {
 			for (int j = 0; j < grafo[i].length; j++) {
-				if (grafo[i][j].equals("c")) {
-					grafo[i][j] = "";
+				if (grafo[i][j].contains("c")) {
+					grafo[i][j] = grafo[i][j].replace("c", "");
 					Casilla cas = c.getCasillaInGrafo(new Casilla(i, j));
 					c.setPos_inicial(cas);
 				}
